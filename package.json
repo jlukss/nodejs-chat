@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-chat",
+  "version": "0.0.1",
+  "description": "WebChat Server",
+  "main": "webServer.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./test/*.spec.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlukss/nodejs-chat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "Jurģis Lukss",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.1",
+    "chai": "^4.2.0"
+  }
+}
