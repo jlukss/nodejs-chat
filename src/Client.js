@@ -12,6 +12,7 @@ class Client {
         socket.on('message', (message, callback) => this.onMessage(message, callback));
         
         console.log(nickname + ' connected', socket.id);
+        // this._server.emit('chat event', this._nickname + ' joined chat');
 
         this.resetTimer();
     }

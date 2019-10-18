@@ -8,7 +8,10 @@ function socketServer(serverToBind, defaultTimeout = 30000) {
     wsServer.use((socket, next) => {
         if (nicknameExists(wsServer, socket.handshake.query.nickname)) {
             console.log('Nickname exists');
-            return next(new Error('Authentication error'));
+            return next(new Error('Username already exists'));
+        }
+        if (!validateNickname(socket.handshake.query.nickname)) {
+            return next(new Error('Invalid nickname'));
         }
         console.log('Nickname unique');
         return next();
@@ -31,6 +34,12 @@ function nicknameExists(server, nickname) {
             }
         }
     }) != undefined;
+}
+
+function validateNickname(nickname) {
+    re = new RegExp('^[a-zA-Z0-9]+$');
+
+    return re.test(nickname);
 }
   
 module.exports = socketServer;
