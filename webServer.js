@@ -17,11 +17,12 @@ function handler(req, res) {
 }
 
 process.on('SIGTERM', () => {
-    socketServer.emit('chat event', 'Server is going down', () => {
-        socketServer.close(() => {
-            app.close(() => {
-                process.exit(0);
-            });
+    console.info('Gracefully shutting down...');
+    socketServer.emit('chat event', 'Server is going down');
+    socketServer.close(() => {
+        app.close(() => {
+            console.info('Shutdown...');
+            process.exit(0);
         });
     });
 });

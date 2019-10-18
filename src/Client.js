@@ -11,7 +11,7 @@ class Client {
 
         socket.on('message', (message, callback) => this.onMessage(message, callback));
         
-        console.log(nickname + ' connected', socket.id);
+        console.info(nickname + ' connected', socket.id);
         // this._server.emit('chat event', this._nickname + ' joined chat');
 
         this.resetTimer();
@@ -21,7 +21,7 @@ class Client {
         this.resetTimer();
         if (this.validateData(message)) {
             this._server.emit('message', this._nickname + ': ' + message);
-            console.log('Received message from ' + this._nickname + ': ' + message);
+            console.info('Received message from ' + this._nickname + ': ' + message);
 
             if (callback != undefined) {
                 return callback(message);
@@ -35,7 +35,7 @@ class Client {
 
     onDisconnect() {
         if (this._connected) {
-            console.log(this._nickname + ' disconnected');
+            console.info(this._nickname + ' disconnected');
             this._server.emit('chat event', this._nickname + ' left the chat, connection lost');
             if (this._timer) {
                 clearTimeout(this._timer);
@@ -55,7 +55,7 @@ class Client {
         this._server.emit('reason', 'Disconnected due to inactivity');
         this._connected = false;
         this._socket.disconnect(true);
-        console.log(this._nickname + ' kicked');
+        console.info(this._nickname + ' kicked');
     }
 
     validateData(data) {

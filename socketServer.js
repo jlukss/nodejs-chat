@@ -7,10 +7,11 @@ function socketServer(serverToBind, defaultTimeout = 30000) {
 
     wsServer.use((socket, next) => {
         if (nicknameExists(wsServer, socket.handshake.query.nickname)) {
-            console.log('Nickname exists');
+            console.error('Nickname exists');
             return next(new Error('Username already exists'));
         }
         if (!validateNickname(socket.handshake.query.nickname)) {
+            console.error('Nickname invalid');
             return next(new Error('Invalid nickname'));
         }
         console.log('Nickname unique');
@@ -26,7 +27,7 @@ function socketServer(serverToBind, defaultTimeout = 30000) {
 }
 
 function nicknameExists(server, nickname) {
-    console.log('Check nickname exists: ' + nickname);
+    console.info('Check nickname exists: ' + nickname);
     return Object.keys(server.sockets.sockets).find(function(e) {
         if (server.sockets.sockets[e].clientData) {
             if (server.sockets.sockets[e].connected && server.sockets.sockets[e].clientData.nickname == nickname) {
