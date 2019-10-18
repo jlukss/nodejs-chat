@@ -16,14 +16,17 @@ function socketServer(serverToBind, defaultTimeout = 30000) {
   
     wsServer.on('connection', (clientSocket) => {
         clientSocket.clientData = new Client(wsServer, clientSocket, clientSocket.handshake.query.nickname, defaultTimeout);
+
     });
+
+    return wsServer;
 }
 
 function nicknameExists(server, nickname) {
     console.log('Check nickname exists: ' + nickname);
     return Object.keys(server.sockets.sockets).find(function(e) {
         if (server.sockets.sockets[e].clientData) {
-            if (server.sockets.sockets[e].clientData.nickname == nickname) {
+            if (server.sockets.sockets[e].connected && server.sockets.sockets[e].clientData.nickname == nickname) {
                 return true;
             }
         }

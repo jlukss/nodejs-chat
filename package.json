@@ -4,7 +4,8 @@
   "description": "WebChat Server",
   "main": "webServer.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/*.spec.js --exit"
+    "test": "./node_modules/.bin/mocha ./test/*.spec.js --exit",
+    "start": "nodejs webServer.js"
   },
   "repository": {
     "type": "git",
