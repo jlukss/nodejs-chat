@@ -52,6 +52,7 @@ class Client {
     
     closeConnection() {
         this._server.emit('chat event', this._nickname + ' was disconnected due to inactivity');
+        this._server.emit('reason', 'Disconnected due to inactivity');
         this._connected = false;
         this._socket.disconnect(true);
         console.log(this._nickname + ' kicked');
